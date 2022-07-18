@@ -21,13 +21,14 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (data) => {
     socket.join(data);
+    socket.broadcast.to(data.room).emit('message', { data: `${socket.id}, has joined!` });
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
   });
- 
+  
 
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
