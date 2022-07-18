@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    socket.emit('send_message',(`User Connected: ${data.author}`) );
+    
     socket.to(data.room).emit("receive_message", data);
   });
   
