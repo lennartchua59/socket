@@ -21,12 +21,12 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (data) => {
     socket.join(data);
-    socket.emit('send_message',(`User Connected: ${socket.id}`) );
+    
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
   socket.on("send_message", (data) => {
-  
+    socket.emit('send_message',(`User Connected: ${data.author}`) );
     socket.to(data.room).emit("receive_message", data);
   });
   
